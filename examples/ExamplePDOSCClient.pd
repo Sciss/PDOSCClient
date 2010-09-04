@@ -1,0 +1,121 @@
+#N canvas 598 119 760 526 10;
+#X text 359 235 outlets: incoming message \, sender address \, bundle
+time \, info;
+#X obj 467 403 / 64;
+#X msg 467 429 /n_set 1000 pan \$1;
+#X obj 467 377 hsl 128 18 -64 65 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 0 1;
+#X msg 468 339 /n_set 1000 amp \$1;
+#X obj 467 289 hsl 128 18 0 127 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 0 1;
+#X obj 4 193 route /c_set;
+#X obj 80 340 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#N canvas 155 401 550 353 outputMeter 0;
+#X obj 40 116 t b b b b;
+#X msg 51 182 /n_set 9999 t_reset 1;
+#X msg 51 162 /c_get 999 1000;
+#X msg 38 204 closebundle;
+#X msg 38 143 openbundle;
+#X obj 420 75 unpack 0 0 0 0;
+#X msg 178 118 /n_free 9999;
+#X obj 92 61 route 0 1;
+#X obj 56 90 metro 33;
+#X msg 178 92 /s_new meter2 9999 1 0 in 0 out 999;
+#X obj 49 60 t f f;
+#X obj 23 286 outlet;
+#X obj 71 287 outlet;
+#X obj 186 290 outlet;
+#X obj 124 289 outlet;
+#X obj 55 31 inlet;
+#X obj 420 46 inlet;
+#X connect 0 0 3 0;
+#X connect 0 1 1 0;
+#X connect 0 2 2 0;
+#X connect 0 3 4 0;
+#X connect 1 0 13 0;
+#X connect 2 0 13 0;
+#X connect 3 0 14 0;
+#X connect 4 0 14 0;
+#X connect 5 1 11 0;
+#X connect 5 3 12 0;
+#X connect 6 0 13 0;
+#X connect 7 0 6 0;
+#X connect 7 1 9 0;
+#X connect 8 0 0 0;
+#X connect 9 0 13 0;
+#X connect 10 0 8 0;
+#X connect 10 1 7 0;
+#X connect 15 0 10 0;
+#X connect 16 0 5 0;
+#X restore 80 372 pd outputMeter;
+#X text 126 260 Some SuperCollider testing:;
+#X msg 216 328 /notify \$1;
+#X obj 216 304 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 307 359 /n_set 1000 gate -6;
+#X msg 307 337 /n_set 1000 freq \$1;
+#X obj 308 311 mtof;
+#X obj 307 289 hsl 128 18 0 128 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 0 1;
+#X msg 308 266 /s_new default 1000 0 0 freq 333.3;
+#X text 326 210 default protocol is udp. other possible value: tcp
+;
+#X text 325 194 default own port is 0 (will be automatically assigned)
+;
+#X obj 222 195 print INFO;
+#X text 300 172 optional args: <String> protocol <int> myPort;
+#X text 300 157 optional args: <int> myPort;
+#X msg 219 92 dumpOSC \$1;
+#X obj 219 68 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 90 192 print REPLY_MSG;
+#X msg 113 133 getlocalport;
+#X msg 103 114 gettarget;
+#X msg 41 90 disconnect;
+#X msg 41 69 target 192.168.0.100 57100;
+#X msg 41 48 target 127.0.0.1 57110;
+#X obj 80 441 hsl 128 15 0 102 0 0 empty empty meter -2 -8 0 10 -262144
+-1 -1 9776 1;
+#X obj 80 460 hsl 128 15 0 102 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 9776 1;
+#X msg 42 17 target 57110;
+#X text 138 16 shorthand for 127.0.0.1 (works only in PD);
+#X obj 97 159 pdj de.sciss.net.PDOSCClient;
+#X obj 464 314 dbtorms;
+#X msg 306 89 dumpOSC 3;
+#X obj 29 401 rmstodb;
+#X obj 85 402 rmstodb;
+#X connect 1 0 2 0;
+#X connect 2 0 34 1;
+#X connect 3 0 1 0;
+#X connect 4 0 34 1;
+#X connect 5 0 35 0;
+#X connect 6 0 8 1;
+#X connect 6 1 24 0;
+#X connect 7 0 8 0;
+#X connect 8 0 37 0;
+#X connect 8 1 38 0;
+#X connect 8 2 34 0;
+#X connect 8 3 34 1;
+#X connect 10 0 34 1;
+#X connect 11 0 10 0;
+#X connect 12 0 34 1;
+#X connect 13 0 34 1;
+#X connect 14 0 13 0;
+#X connect 15 0 14 0;
+#X connect 16 0 34 1;
+#X connect 22 0 34 0;
+#X connect 23 0 22 0;
+#X connect 25 0 34 0;
+#X connect 26 0 34 0;
+#X connect 27 0 34 0;
+#X connect 28 0 34 0;
+#X connect 29 0 34 0;
+#X connect 32 0 34 0;
+#X connect 34 0 6 0;
+#X connect 34 3 19 0;
+#X connect 35 0 4 0;
+#X connect 36 0 34 0;
+#X connect 37 0 30 0;
+#X connect 38 0 31 0;

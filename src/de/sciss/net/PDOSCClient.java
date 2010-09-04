@@ -40,10 +40,11 @@ import de.sciss.net.OSCMessage;
 
 /**
  *  A subclass of <code>com.cycling74.max.MaxObject</code>
- *  that allows bidirectional OSC communication via UDP.
+ *  that allows bidirectional OSC communication via UDP
+ *  or TCP.
  *
  *  @author		Hanns Holger Rutz
- *  @version	0.12, 11-Sep-06
+ *  @version	0.11, 04-Sep-10
  */
 public class PDOSCClient
 extends MaxObject
@@ -379,16 +380,26 @@ implements OSCListener
 		// assemble OSC message
 		for( int i = 0; i < javaArgs.length; i++ ) {
 			final Atom atom = args[ i ];
+//System.out.println( "isInt? " + atom.isInt() + " / isFloat? " + atom.isFloat() );
+			final Object jarg;
 			if( atom.isInt() ) {
-				javaArgs[ i ] = new Integer( atom.toInt() );
+				// note: PD does not distinguish between ints and floats,
+				// hence is says for every number, it is both int and float.
+				// we can only use a heuristic here...
+				if( atom.isFloat() && (atom.toFloat() % 1f != 0f) ) {
+					jarg = new Float( atom.toFloat() );
+				} else {
+					jarg = new Integer( atom.toInt() );
+				}
 			} else if( atom.isFloat() ) {
-				javaArgs[ i ] = new Float( atom.toFloat() );
+				jarg = new Float( atom.toFloat() );
 			} else if( atom.isString() ) {
-				javaArgs[ i ] = atom.toString();
+				jarg = atom.toString();
 			} else {
 				error( getName() + " " + ERR_ARGTYPE + atom.getClass().getName() );
 				return;
 			}
+			javaArgs[ i ] = jarg;
 		}
 		
 		final OSCMessage msg = new OSCMessage( message, javaArgs );
