@@ -12,8 +12,6 @@ If you don't have the binary (@PDOSCClient.jar@), compile the sources with
 
 * @ant@
 
-And you will find a bundled jar in the build folder. Install pdj, for instance on OS X copy the pdj folder into @/Applications/Pd-extended.app/Contents/Plugins@. Then copy @PDOSCClient.jar@ into pdj's @classes@ folder. Go into that folder and unpack the jar
-
-* @jar xf PDOSCClient.jar@
+And you will find a bundled jar in the build folder. Install pdj, for instance on OS X copy the pdj folder into @/Applications/Pd-extended.app/Contents/Plugins@. Then copy @PDOSCClient.jar@ into pdj's @lib@ folder. Note that if this folder doesn't exist, you first need to create it!
 
 Re-open PD and try out the examples patch.
