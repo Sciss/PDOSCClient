@@ -1,0 +1,49 @@
+#N canvas 470 248 754 479 10;
+#X obj 141 193 pdj de.sciss.net.PDOSCClient;
+#X obj 307 231 print INFO;
+#X msg 124 145 getlocalport;
+#X msg 68 42 target 127.0.0.1 57110;
+#X msg 441 302 /s_new default 1000 0 0 freq 333;
+#X msg 113 121 gettarget;
+#X text 367 189 optional args: <int> myPort;
+#X text 367 203 optional args: <String> protocol <int> myPort;
+#X text 419 235 default own port is 0 (will be automatically assigned)
+;
+#X text 419 251 default protocol is udp. other possible value: tcp
+;
+#X obj 441 331 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 438 354 mtof;
+#X msg 438 380 /n_set 1000 freq \$1;
+#X obj 316 330 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 317 358 /notify \$1;
+#X msg 437 411 /n_set 1000 gate -10;
+#X msg 70 70 target 192.168.0.100 57110;
+#X obj 76 228 print REPLY_MSG;
+#X obj 77 253 print REPLY_ADDR;
+#X msg 266 90 dumpOSC \$1;
+#X obj 266 60 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 67 11 target 57110;
+#X text 161 9 Shorthand for 127.0.0.1;
+#X msg 73 96 disconnect;
+#X text 241 300 Some SuperCollider testing:;
+#X connect 0 0 17 0;
+#X connect 0 1 18 0;
+#X connect 0 3 1 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 1;
+#X connect 5 0 0 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 0 1;
+#X connect 13 0 14 0;
+#X connect 14 0 0 1;
+#X connect 15 0 0 1;
+#X connect 16 0 0 0;
+#X connect 19 0 0 0;
+#X connect 20 0 19 0;
+#X connect 21 0 0 0;
+#X connect 23 0 0 0;
