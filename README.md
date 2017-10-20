@@ -1,7 +1,5 @@
 # PDOSCClient
 
-[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sciss&url=https%3A%2F%2Fgithub.com%2FSciss%2FPDOSCClient&title=PDOSCClient&language=Scala&tags=github&category=software)
-
 ## statement
 
 An OSC client for PureData and Max, to be used with the `[pdj]` and `[mxj]` objects to embed java classes in PD / Max. It is (C)opyright 2010&ndash;2016 by Hanns Holger Rutz. All rights reserved. PDOSCClient is released under the GNU Lesser General Public License (see licenses folder) and comes with absolutely no warranties. To contact the author, send an email to `contact at sciss.de`
